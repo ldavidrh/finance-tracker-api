@@ -7,16 +7,18 @@ import { Request } from 'express';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private configService: ConfigService) {
+    const jwtSecret = configService.get<string>('JWT_SECRET')!;
+
     super({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       jwtFromRequest:
         ExtractJwt.fromAuthHeaderAsBearerToken() as JwtFromRequestFunction<Request>,
       ignoreExpiration: false,
-      secretOrKey: this.configService.get<string>('JWT_SECRET')!,
+      secretOrKey: jwtSecret,
     });
   }
 
-  async validate(payload: any) {
+  validate(payload: { sub: string; username: string }) {
     return { userId: payload.sub, username: payload.username };
   }
 }
