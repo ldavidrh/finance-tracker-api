@@ -1,17 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(helmet());
 
   const config = new DocumentBuilder()
     .setTitle('Finance Tracker')
     .setDescription('API For the Finance Tracker project')
     .setVersion('1.0')
     .addTag('finance')
-    .addTag('tracking')
-    .addTag('expenses')
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
