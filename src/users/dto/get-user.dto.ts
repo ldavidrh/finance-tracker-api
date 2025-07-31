@@ -1,3 +1,5 @@
+import { Expense } from 'src/expenses/entities/expense.entity';
+
 export class GetUserDto {
   id: number;
   email: string;
@@ -7,4 +9,5 @@ export class GetUserDto {
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
+  expenses: Expense[];
 }
