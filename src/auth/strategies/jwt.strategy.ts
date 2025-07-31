@@ -10,7 +10,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const jwtSecret = configService.get<string>('JWT_SECRET')!;
 
     super({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       jwtFromRequest:
         ExtractJwt.fromAuthHeaderAsBearerToken() as JwtFromRequestFunction<Request>,
       ignoreExpiration: false,
