@@ -1,9 +1,10 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsNumber } from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -14,9 +15,14 @@ export class Expense {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  @IsNotEmpty()
+  @Column({ nullable: false })
   value: number;
+
+  @Column()
+  userId: number;
+
+  @Column()
+  categoryId: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -24,7 +30,7 @@ export class Expense {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @IsNotEmpty()
   @ManyToOne(() => User, (user) => user.expenses, { nullable: false })
+  @JoinColumn({ name: 'userId' })
   user: User;
 }

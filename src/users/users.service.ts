@@ -20,7 +20,6 @@ export class UsersService {
 
     const user = this.userRepository.create({
       ...createUserDto,
-      username: createUserDto.email,
       password: hashedPassword,
     });
     try {
@@ -46,8 +45,8 @@ export class UsersService {
     return this.userRepository.findBy({ id });
   }
 
-  findByUsername(username: string): Promise<User | null> {
-    return this.userRepository.findOneBy({ username });
+  findByEmail(email: string): Promise<User | null> {
+    return this.userRepository.findOneBy({ email });
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

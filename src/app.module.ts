@@ -6,6 +6,7 @@ import { ExpensesModule } from './expenses/expenses.module';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
     ExpensesModule,
     AuthModule,
     DatabaseModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

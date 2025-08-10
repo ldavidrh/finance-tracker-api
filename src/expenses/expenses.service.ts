@@ -1,18 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from './entities/expense.entity';
 import { Repository } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import { SavedExpenseDto } from './dto/saved-expense.dto';
 
 @Injectable()
 export class ExpensesService {
+  private logger = new Logger();
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
   ) {}
 
-  create(createExpenseDto: CreateExpenseDto) {
-    return this.expenseRepository.save(createExpenseDto);
+  async create(createExpenseDto: CreateExpenseDto) {
+    this.logger.log(`Saving expense ${JSON.stringify(createExpenseDto)}`);
+    try {
+      return await this.expenseRepository.save(createExpenseDto);
+    } catch (err) {
+      this.logger.error(err);
+      throw new InternalServerErrorException("Couldn't save expense");
+    }
   }
 
   findAll() {

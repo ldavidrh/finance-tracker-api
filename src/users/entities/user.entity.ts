@@ -18,9 +18,6 @@ export class User {
   })
   email: string;
 
-  @Column({ unique: true })
-  username: string;
-
   @Column()
   password: string;
 
@@ -41,6 +38,6 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Expense, (expense) => expense.user)
+  @OneToMany(() => Expense, (expense) => expense.user, { nullable: false })
   expenses: Expense[];
 }
