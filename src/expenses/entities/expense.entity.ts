@@ -1,4 +1,4 @@
-import { IsDefined, IsNotEmpty, IsNumber } from 'class-validator';
+import { Category } from 'src/categories/entities/category.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -19,10 +19,10 @@ export class Expense {
   value: number;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
-  categoryId: number;
+  categoryId: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -33,4 +33,8 @@ export class Expense {
   @ManyToOne(() => User, (user) => user.expenses, { nullable: false })
   @JoinColumn({ name: 'userId' })
   user: User;
+
+  @ManyToOne(() => Category, (category) => category.id, { nullable: true })
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
 }

@@ -41,7 +41,7 @@ export class UsersService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.userRepository.findBy({ id });
   }
 
@@ -53,7 +53,7 @@ export class UsersService {
     return this.userRepository.update(id, updateUserDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.userRepository.delete({ id });
   }
 }

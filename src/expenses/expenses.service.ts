@@ -8,8 +8,6 @@ import { UpdateExpenseDto } from './dto/update-expense.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from './entities/expense.entity';
 import { Repository } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
-import { SavedExpenseDto } from './dto/saved-expense.dto';
 
 @Injectable()
 export class ExpensesService {

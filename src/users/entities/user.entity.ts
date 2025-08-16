@@ -10,13 +10,16 @@ import {
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column('text', {
+  @Column({
     unique: true,
   })
   email: string;
+
+  @Column({ default: false })
+  emailConfirmed: boolean;
 
   @Column()
   password: string;
