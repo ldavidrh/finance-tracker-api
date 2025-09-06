@@ -3,10 +3,10 @@ import { EmailService } from './email.service';
 
 describe('EmailService', () => {
   let service: EmailService;
-
+  const mockEmailService = { sendConfirmationEmail: jest.fn() };
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [EmailService],
+      providers: [{ provide: EmailService, useValue: mockEmailService }],
     }).compile();
 
     service = module.get<EmailService>(EmailService);
