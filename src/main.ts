@@ -29,7 +29,10 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 3000, () =>
-    logger.log(`app running on: http://localhost:${process.env.PORT || 3000}`),
+    logger.log(
+      `App running on: http://localhost:${process.env.PORT || 3000}`,
+      'NestApplication',
+    ),
   );
 }
 void bootstrap();

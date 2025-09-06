@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { env } from 'process';
 import { AuthService } from 'src/auth/auth.service';
 import { UserCreatedEvent } from 'src/users/events/user-created.event';
 
