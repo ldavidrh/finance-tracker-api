@@ -12,7 +12,7 @@ import { User } from 'src/users/entities/user.entity';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private userService: UsersService) {
-    super();
+    super({ usernameField: 'email' });
   }
   async validate(email: string, password: string): Promise<User> {
     const user = await this.userService.findByEmail(email);
@@ -21,8 +21,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new NotFoundException('Invalid credentials');
     }
 
-    if (!user.isActive || !user.emailConfirmed) {
-      throw new UnauthorizedException('Not authorized');
+    if (!user.isActive) {
+      throw new UnauthorizedException('User account is not active');
     }
 
     if (!(await bcrypt.compare(password, user.password))) {
